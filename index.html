@@ -1,21 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-        body {
-          background-image: url('img_girl.jpg');
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            user-select: none;
         }
-        </style>
+
+        body {
+            background-color: rgb(31, 31, 31);
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 4rem;
+            width: 10rem;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 5px black;
+            background-color: white;
+        }
+    </style>
+
+    <script>
+        const button = document.getElementById("runaway-btn");
+
+        const animateMove = (element, prop, pixels) =>
+            anime({
+                targets: element,
+                [prop]: `${pixels}px`,
+                easing: "easeOutCirc"
+            });
+
+        ["mouseover", "click"].forEach(function (el) {
+            button.addEventListener(el, function (event) {
+                const top = getRandomNumber(window.innerHeight - this.offsetHeight);
+                const left = getRandomNumber(window.innerWidth - this.offsetWidth);
+
+                animateMove(this, "left", left).play();
+                animateMove(this, "top", top).play();
+            });
+        });
+
+        const getRandomNumber = (num) => {
+            return Math.floor(Math.random() * (num + 1));
+        };
+
+
+
+    </script>
 </head>
 <center>
-<body>
-    <h1>Yonatan Nissan</h1> 
 
-    <iframe src="https://open.spotify.com/embed/track/3bC1ahPIYt1btJzSSEyyrF" style="border:0px #ffffff none;" name="MySpotify" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe><div style="position: absolute;width: 91%;bottom: 4px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.2;font-size: 0px;background: #fff;"><script type="text/javascript" src="https://www.embedista.com/j/spotify.js"></script><a href="https://www.embedista.com/spotify-embed">Spotify Embed</a> </small></div><style>.boxes2{height:212px;width:316px;} #new img{max-width:none!important;background:none!important}</style></div>
-</body>
+    <body>
+        <h1>Yonatan Nissan</h1>
+
+        <button id='runaway-btn'>NO</button> <button id='YES-btn'>YES</button>
+
+
+    </body>
 </center>
+
 </html>
